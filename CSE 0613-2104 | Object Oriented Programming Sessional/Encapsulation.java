@@ -1,44 +1,59 @@
-class Atm {
-    // attributes
-    private int card_number = 1;
-    private int balance = 1000;
+class UGV{
+    String department;
+    String building;
+}
 
-    // functions
-    public void withdraw(int amount){
-        if (amount > balance){
-            System.out.println("exceed the limit");
-        }
-        else{
-            balance = balance - amount;
-        }
-    }
 
-    public void display() {
-        System.out.println("card number: " + card_number);
-        System.out.println("blance: " + balance);
+class Student extends UGV{
+    // variables/attributes
+    int id;
+    String name;
+
+    // functions/methods
+    void display(){
+        System.out.println("Student ID: "+ id);
+        System.out.println("Student Name: "+ name);
+        System.out.println("Student Department: "+ department);
+        System.out.println("Building: "+ building);
     }
 }
 
 public class Encapsulation {
     public static void main(String[] args) {
-        Atm u1 = new Atm();
-        u1.display();
-        System.out.println("==========");
-        u1.withdraw(5000);
-        u1.display();
+        Student s1 = new Student();
+        s1.id = 1;
+        s1.name = "Mr S";
+        s1.department = "CSE";
+        s1.building = "B2";
 
-        // u1.display();
-        // u2.display();
+        s1.display();
+
+        System.out.println("--------------------------------");
+        Student s2 = new Student();
+        s2.id = 2;
+        s2.name = "Mr S2222";
+        s2.department = "BBA";
+        s2.building = "B1";
+        s2.display();;
     }
 }
 
-/*
-functions/methods
-access modifiers
-    1.public
-    2.private
-    3.protected
-    4.default value
-Encapsulation
-    1. Data Validation
-*/
+// class
+// functions
+
+// Access Modifiers
+    // private
+    // public
+    // protected
+    // default value
+
+// encapsulation
+    // data validation
+
+
+
+// balance --> private
+// display --> public
+// balance --> private
+
+// user --> display

@@ -1,3 +1,7 @@
+# Project Title: Turing Test and Intelligent Agent Project
+# Project Details: Understand what makes a system intelligent. Study the Turing Test, then build a simple rule-based chatbot in Python that responds to user input and attempts to imitate human conversation. Introduce the concept of an agent, its environment, percepts, and actions.
+
+
 import re
 import random
 from datetime import datetime
