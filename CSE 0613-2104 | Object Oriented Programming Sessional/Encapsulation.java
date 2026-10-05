@@ -25,7 +25,7 @@ public class Encapsulation {
         s1.name = "Mr S";
         s1.department = "CSE";
         s1.building = "B2";
-
+        
         s1.display();
 
         System.out.println("--------------------------------");

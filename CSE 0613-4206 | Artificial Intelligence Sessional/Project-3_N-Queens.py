@@ -15,7 +15,6 @@ python Project_03_Heuristic_Search.py
 
 import heapq
 import time
-import copy
 
 
 # ============================================================
