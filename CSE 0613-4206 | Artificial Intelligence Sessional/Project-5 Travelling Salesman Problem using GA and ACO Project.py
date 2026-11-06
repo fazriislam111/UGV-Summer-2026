@@ -1,12 +1,5 @@
 """
 Travelling Salesman Problem (TSP) using Genetic Algorithm (GA) and Ant Colony Optimization (ACO)
-
-This is a beginner-friendly implementation for undergraduate students.
-It solves a small TSP instance using two metaheuristic methods:
-1. Genetic Algorithm (selection, crossover, mutation)
-2. Ant Colony Optimization (pheromone update)
-
-The program compares both methods and prints the best route and its distance.
 """
 
 import random
@@ -31,14 +24,12 @@ CITY_COORDINATES = {
 # 2. Helper functions
 # -----------------------------
 def calculate_distance(city1, city2):
-    """Return Euclidean distance between two cities."""
     x1, y1 = CITY_COORDINATES[city1]
     x2, y2 = CITY_COORDINATES[city2]
     return round(math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2), 2)
 
 
 def build_distance_matrix(cities):
-    """Create a full distance matrix for all cities."""
     matrix = {}
     for city in cities:
         matrix[city] = {}
@@ -51,7 +42,6 @@ def build_distance_matrix(cities):
 
 
 def route_distance(route, distance_matrix):
-    """Compute total tour length for a route."""
     total = 0.0
     for i in range(len(route)):
         current = route[i]
@@ -61,7 +51,6 @@ def route_distance(route, distance_matrix):
 
 
 def print_route(route):
-    """Display a route in a readable way."""
     return " -> ".join(route + [route[0]])
 
 
@@ -69,7 +58,6 @@ def print_route(route):
 # 3. Genetic Algorithm (GA)
 # -----------------------------
 def create_initial_population(population_size, cities):
-    """Create random valid tours for the initial population."""
     population = []
     for _ in range(population_size):
         route = cities.copy()
@@ -79,7 +67,6 @@ def create_initial_population(population_size, cities):
 
 
 def tournament_selection(population, costs):
-    """Choose one parent using tournament selection."""
     index1 = random.randint(0, len(population) - 1)
     index2 = random.randint(0, len(population) - 1)
 
@@ -89,7 +76,6 @@ def tournament_selection(population, costs):
 
 
 def order_crossover(parent1, parent2):
-    """Create a child using Order Crossover (OX)."""
     size = len(parent1)
     start = random.randint(0, size - 1)
     end = random.randint(start, size - 1)
@@ -108,7 +94,6 @@ def order_crossover(parent1, parent2):
 
 
 def mutate_route(route, mutation_rate):
-    """Apply mutation by swapping two cities."""
     if random.random() < mutation_rate:
         i = random.randint(0, len(route) - 1)
         j = random.randint(0, len(route) - 1)
@@ -117,7 +102,6 @@ def mutate_route(route, mutation_rate):
 
 
 def run_genetic_algorithm(distance_matrix, population_size=40, generations=80, mutation_rate=0.08):
-    """Run the Genetic Algorithm and return the best route and history."""
     cities = list(CITY_NAMES)
     population = create_initial_population(population_size, cities)
 
@@ -137,7 +121,6 @@ def run_genetic_algorithm(distance_matrix, population_size=40, generations=80, m
 
         new_population = []
 
-        # Keep the best route from the current generation
         new_population.append(best_route.copy())
 
         while len(new_population) < population_size:
@@ -163,14 +146,11 @@ def run_genetic_algorithm(distance_matrix, population_size=40, generations=80, m
 # 4. Ant Colony Optimization (ACO)
 # -----------------------------
 def run_ant_colony_optimization(distance_matrix, ants=30, iterations=60, alpha=1.0, beta=3.0, rho=0.1, q=100.0):
-    """Run Ant Colony Optimization and return the best route and history."""
     cities = list(CITY_NAMES)
     n = len(cities)
 
-    # Pheromone matrix; start with a small positive value
     pheromone = [[1.0 for _ in range(n)] for _ in range(n)]
 
-    # Heuristic information: shorter distances get higher desirability
     heuristic = [[0.0 for _ in range(n)] for _ in range(n)]
     city_index = {city: i for i, city in enumerate(cities)}
 
@@ -229,12 +209,10 @@ def run_ant_colony_optimization(distance_matrix, ants=30, iterations=60, alpha=1
                 best_cost = cost
                 best_route = visited.copy()
 
-        # Evaporation
         for i in range(n):
             for j in range(n):
                 pheromone[i][j] *= (1.0 - rho)
 
-        # Global update with best route
         if best_route is not None:
             for i in range(n):
                 current = best_route[i]
